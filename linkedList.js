@@ -37,10 +37,10 @@ function createLinkedList() {
             head = newNode;
         }
     }
-    function head() {
+    function gethead() {
         return head;
     }
-    function tail() {
+    function gettail() {
         return tail;
     }
     function at(index) {
@@ -56,12 +56,77 @@ function createLinkedList() {
         }
         return current;
     }
+    function pop() {
+        if (head == null)
+            return null;
+        if (head.next == null) {
+            const temp = head;
+            head = null;
+            tail = null;
+            return temp;
+        }
+
+        let current = head;
+        while (current.next.next !== null) {
+            current = current.next;
+        }
+        const temp = current.next
+        tail = current;
+        tail.next = null;
+        return temp
+    }
+    function contains(value) {
+        let current = head;
+        while (current !== null) {
+            if (current.value === value) {
+                return "yes"
+            }
+            current = current.next;
+        }
+        return "no"
+    }
+    function find(value) {
+        let current = head;
+        let index = 0;
+        while (current !== null) {
+            if (current.value === value) {
+                return index
+            }
+            current = current.next;
+            index++
+        }
+        return -1;
+    }
+    function printList() {
+        current = head;
+        let output = '';
+        while (current !== null) {
+            output += `(${current.value})->`;
+            current = current.next;
+        }
+        output += 'null';
+        console.log(output);
+    }
     return {
         append,
         prepend,
         length,
-        head,
-        tail,
+        gethead,
+        gettail,
         at,
+        pop,
+        contains,
+        find,
+        printList
     }
 }
+const list = createLinkedList();
+list.append("dog");
+list.append("cat");
+list.append("parrot");
+list.append("hamster");
+list.append("snake");
+list.append("turtle");
+list.printList();
+list.pop();
+list.printList();

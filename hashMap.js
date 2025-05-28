@@ -53,19 +53,23 @@ function createHashMap() {
             }
         return -1;
     }
+
+
     function remove(key) {
         let index = hash(key) % capacity;
         if (!buckets[index]) {
-            return -1;
+            return false;
         }
         else
             for (let pair of buckets[index]) {
                 if (pair[0] === key) {
-                    return "yes";
+                    ;
                 }
             }
         return -1;
     }
+
+
     return {
         set,
         get,

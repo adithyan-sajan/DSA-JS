@@ -101,10 +101,23 @@ function createTree(array) {
                 inOrderPrev.left = inOrderNode.right;
         }
     }
+    function find(val) {
+        currentNode = rootNode;
+        while (currentNode !== null) {
+            if (val > currentNode.data)
+                currentNode = currentNode.right;
+            else if (val < currentNode.data)
+                currentNode = currentNode.left;
+            else
+                break;
+        }
+        return currentNode;
+    }
     return {
         rootNode,
         insert,
         deleteItem,
+        find,
     }
 }
 
@@ -125,5 +138,5 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 array = [1, 2, 3, 4, 5];
 tree = createTree(array);
 tree.insert(7)
-tree.deleteItem(4)
+console.log(tree.find(4))
 prettyPrint(tree.rootNode);
